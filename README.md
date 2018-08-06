@@ -6,6 +6,7 @@ npm 3+
 ```
 ## In one tab:
 $ git clone https://github.com/joannawheeler/react-stockcharts-line
+$ cd react-stockcharts-line
 $ cd server
 $ npm install
 $ touch .env # create a file to store database connection credentials
