@@ -12,6 +12,14 @@ $ PORT=3001 node bin/www # this should start a proxy server at localhost:3001/st
 ## In another tab:
 $ cd react-stockcharts-line
 $ cd linechart
+$ touch .env # create a file to store database connection credentials
+# in the below command, replace /* insert appropriate credentials */ with the appropriate credentials
+$ echo "
+DB_HOST=/* insert appropriate credentials */
+DB_USER=/* insert appropriate credentials */
+DB_PASS=/* insert appropriate credentials */
+DB_NAME=/* insert appropriate credentials */
+"
+>> .env
 $ npm start # this should launch a browser with http://localhost:3000
 ```
-
