@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = "../db"
+const db = require("../db");
+
 
 const Trade = {
   getTrades: function (callback) {
