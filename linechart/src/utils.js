@@ -3,7 +3,11 @@ const cloneDeep = require('lodash.clonedeep');
 
 export function getData() {
 
-    const promiseMSFT = fetch('http://206.189.216.139/indicatorData?table=xmas1&startDate=1937-01-01T12:00:27+10:00&endDate=2018-07-19T02:00:00+00:20')
+    const table = 'xmas1';
+    const startDate ='1937-01-01T12:00:27+10:00';
+    const endDate = '2018-07-19T02:00:00+00:20';
+
+    const promiseMSFT = fetch('http://206.189.216.139/indicatorData?table=' + table + '&startDate=' + startDate + '&endDate=' + endDate)
         .then(res => {
             return res.text();
         })
