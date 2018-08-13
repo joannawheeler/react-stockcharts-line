@@ -20,51 +20,31 @@ import {
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import { HoverTooltip } from "react-stockcharts/lib/tooltip";
-import { ema } from "react-stockcharts/lib/indicator";
 import { OHLCTooltip } from "react-stockcharts/lib/tooltip";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
 const dateFormat = timeFormat("%-m/%-d/%Y %-I:%M %p");
-const numberFormat = format(".2f");
+const numberFormat = format(".100000000000000000");
 
 function tooltipContent(ys) {
 	return ({ currentItem, xAccessor }) => {
 		return {
 			x: dateFormat(xAccessor(currentItem)),
 			y: [
-				// {
-				// 	label: "entry time",
-				// 	value: currentItem.entryTime && numberFormat(currentItem.entryTime)
-				// },
-				// {
-				// 	label: "entry price",
-				// 	value: currentItem.entryPrice && numberFormat(currentItem.Price)
-				// },
-				// {
-				// 	label: "low",
-				// 	value: currentItem.low && numberFormat(currentItem.low)
-				// },
 				{
-					label: "close",
+					label: "Close",
 					value: currentItem.close && numberFormat(currentItem.close)
 				},
 				{
-					label: "numContracts",
+					label: "Contracts",
 					value: currentItem.numContracts && numberFormat(currentItem.numContracts)
 				},
 				{
-					label: "pnl",
+					label: "PNL",
 					value: currentItem.pnl && numberFormat(currentItem.pnl)
 				}
 			]
-				// .concat(
-				// 	ys.map(each => ({
-				// 		label: each.label,
-				// 		value: each.value(currentItem),
-				// 		stroke: each.stroke
-				// 	}))
-				// )
 				.filter(line => line.value)
 		};
 	};
@@ -74,25 +54,6 @@ class LineAndScatterChart extends React.Component {
 
 	render() {
 		let { data: initialData, type, width, ratio } = this.props;
-
-		// const ema20 = ema()
-		// 	.id(0)
-		// 	.options({ windowSize: 20 })
-		// 	.merge((d, c) => {
-		// 		d.ema20 = c;
-		// 	})
-		// 	.accessor(d => d.ema20);
-
-		// const ema50 = ema()
-		// 	.id(2)
-		// 	.options({ windowSize: 50 })
-		// 	.merge((d, c) => {
-		// 		d.ema50 = c;
-		// 	})
-		// 	.accessor(d => d.ema50);
-
-		// const calculatedData = ema50(ema20(initialData));
-
 		const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
 		const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData);
 		const xExtents = [
@@ -137,9 +98,8 @@ class LineAndScatterChart extends React.Component {
 					<ScatterSeries
 						yAccessor={d => d.close}
 						marker={CircleMarker}
-						markerProps={{ r: 3, fill: changeColor }} />
+						markerProps={{ r: 8, fill: changeColor }} />
 					<HoverTooltip
-						// yAccessor={ema50.accessor()}
 						tooltipContent={tooltipContent()
 						}
 						fontSize={15}
