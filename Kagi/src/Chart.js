@@ -7,9 +7,9 @@ import { timeFormat } from "d3-time-format";
 
 import { ChartCanvas, Chart } from "react-stockcharts";
 import {
-	ScatterSeries,
-	CircleMarker,
 	LineSeries,
+	ScatterSeries,
+	CircleMarker
 } from "react-stockcharts/lib/series";
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
 import {
@@ -20,7 +20,9 @@ import {
 
 import { discontinuousTimeScaleProvider } from "react-stockcharts/lib/scale";
 import { HoverTooltip } from "react-stockcharts/lib/tooltip";
-import { OHLCTooltip } from "react-stockcharts/lib/tooltip";
+import {
+	OHLCTooltip,
+} from "react-stockcharts/lib/tooltip";
 import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
@@ -28,34 +30,43 @@ const dateFormat = timeFormat("%-m/%-d/%Y %-I:%M %p");
 const numberFormat = format(".100000000000000000");
 
 function tooltipContent(ys) {
-	return ({ currentItem, xAccessor }) => {
-		return {
-			x: dateFormat(xAccessor(currentItem)),
-			y: [
-				{
-					label: "Close",
-					value: currentItem.close && numberFormat(currentItem.close)
-				},
-				{
-					label: "Contracts",
-					value: currentItem.numContracts && numberFormat(currentItem.numContracts)
-				},
-				{
-					label: "PNL",
-					value: currentItem.pnl && numberFormat(currentItem.pnl)
-				}
-			]
-				.filter(line => line.value)
-		};
-	};
-}
+	  		return ({ currentItem, xAccessor }) => {
+
+					return {
+								x: dateFormat(xAccessor(currentItem)),
+								y: [
+									{
+										label: "Close",
+										value: currentItem.close && numberFormat(currentItem.close)
+									},
+									{
+										label: "Contracts",
+										value: currentItem.numContracts && numberFormat(currentItem.numContracts)
+									},
+									{
+										label: "PNL",
+										value: currentItem.pnl && numberFormat(currentItem.pnl)
+									}
+								]
+									.filter(line => {
+										return line.value
+									})
+					}
+		    }
+
+	}
 
 class LineAndScatterChart extends React.Component {
-
 	render() {
 		let { data: initialData, type, width, ratio } = this.props;
-		const xScaleProvider = discontinuousTimeScaleProvider.inputDateAccessor(d => d.date);
-		const { data, xScale, xAccessor, displayXAccessor } = xScaleProvider(initialData);
+		const xScaleProvider = discontinuousTimeScaleProvider
+			.inputDateAccessor(d => d.date);
+		const {
+			data,
+			xScale,
+			xAccessor,
+			displayXAccessor,
+		} = xScaleProvider(initialData);
 		const xExtents = [
 			xAccessor(last(data)),
 			xAccessor(data[data.length - 20])
@@ -74,6 +85,7 @@ class LineAndScatterChart extends React.Component {
 					displayXAccessor={displayXAccessor}
 					xScale={xScale}
 					xExtents={xExtents}>
+
 				<Chart id={1}
 						yExtents={d => [d.close]}>
 					<XAxis axisAt="bottom" orient="bottom"/>
@@ -92,18 +104,21 @@ class LineAndScatterChart extends React.Component {
 						at="right"
 						orient="right"
 						displayFormat={format(".2f")} />
+
 					<LineSeries
 						yAccessor={d => d.close}
 						stroke="black" />
+
 					<ScatterSeries
-						yAccessor={d => d.close}
+						yAccessor={d => d.bsClose}
 						marker={CircleMarker}
 						markerProps={{ r: 8, fill: changeColor }} />
+
 					<HoverTooltip
-						tooltipContent={tooltipContent()
-						}
+						tooltipContent={tooltipContent()}
 						fontSize={15}
 					/>
+
 					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
 				</Chart>
 
