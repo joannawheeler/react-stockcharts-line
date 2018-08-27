@@ -1,0 +1,114 @@
+.dropdown-menu{min-width:200px;}
+#today-revenue svg {
+    display: inline !important;
+    stroke:#000 !important;
+}
+#today-revenue Path {
+    stroke:#000 !important;
+
+}
+#today-revenue2 svg {
+    display: inline !important;
+    stroke:#000 !important;
+}
+#today-revenue2 Path {
+    stroke:#000 !important;
+
+}
+.heading-elements-home {
+    background-color: inherit;
+    position: relative;
+
+  }
+
+.home-mcap-labels{display: inline-block;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 900;}
+
+.bm-20{margin-bottom:20px !important;}
+
+h6.text-semibold.no-margin {
+    font-size: 13px;
+}
+.progress-list > li span {
+    float: right;
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+}
+.btn-xs{
+    padding: 2px 8px !important;
+    font-size: 10px !important;
+    float: right !important;
+    line-height: 1.666666 !important;
+}
+.portal .panel-heading h6.panel-title {
+    font-size: 12px;
+}
+.portal .panel-body {
+    background-color: #fff;
+    padding-top:0px !important;
+    padding-bottom:0px !important;
+}
+.panel.portal {
+    border: none;
+}
+.panel-heading.bg-slate-400{padding:10px 20px !important;}
+.condensed .checker {
+    width: 14px !important;
+    height: 14px !important;
+    top: 3px !important;
+}
+
+.condensed .checker span {
+    width: 14px !important;
+    height: 14px !important;
+    top: -5px;
+    left: -2px;
+}
+.condensed .checker span:after {
+    font-size: 12px;
+}
+.condensed .checkbox {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.condensed
+.condensed .checker, .condensed .checker span, .condensed .checker input {
+    width: 14px;
+    height: 14px;
+}
+.techlabel {
+    position: relative;
+    top: -4px;
+    left: -4px;
+}
+.form-group.condensed {
+    margin-bottom: 0px !important;
+}
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+.pre-scrollable {
+    max-height: 229px !important;
+    overflow-y: scroll;
+}
+.panel-body.slider {
+    padding-top: 10px !important;
+}
+span.irs-from, span.irs-to {
+    font-size: 9px !important;
+    padding: 3px !important;
+    top: -1px !important;
+    background-color: #333;
+    color:#fff !important;
+}
+
+.irs-max, .irs-min{
+  font-size: 10px !important;
+
+    top: -1px !important;
+    padding: 3px !important;}
