@@ -1,6 +1,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import Input from './Input'
 
 import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
@@ -24,6 +25,31 @@ import { fitWidth } from "react-stockcharts/lib/helper";
 import { last } from "react-stockcharts/lib/utils";
 
 class LineAndScatterChart extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+    	exc: '',
+    	int: ''
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.getData = this.getData.bind(this);
+  }
+
+  onChange = (exc, int) => {
+  	console.log(exc);
+  	console.log(int);
+  	this.setState({
+  		exc: exc,
+  		int: int
+  	})
+  }
+
+  getData = () => {
+  	//do ajax call to get new vals with this.state.exc and this.state.int
+  }
+
 	render() {
 		const { data: initialData, type, width, ratio } = this.props;
 		const xScaleProvider = discontinuousTimeScaleProvider
@@ -38,47 +64,49 @@ class LineAndScatterChart extends React.Component {
 		const changeColor = (d) => d.entryText === "BUY" ? "green" : "red";
 
 		return (
-			<ChartCanvas ratio={ratio} width={width} height={400}
-					margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
-					type={type}
-					pointsPerPxThreshold={1}
-					seriesName="MSFT"
-					data={data}
-					xAccessor={xAccessor}
-					displayXAccessor={displayXAccessor}
-					xScale={xScale}
-					xExtents={xExtents}>
-				<Chart id={1}
-						yExtents={d => [d.close]}>
-					<XAxis axisAt="bottom" orient="bottom"/>
-					<YAxis
-						axisAt="right"
-						orient="right"
-						// tickInterval={5}
-						// tickValues={[40, 60]}
-						ticks={5}
-					/>
-					<MouseCoordinateX
-						at="bottom"
-						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")} />
-					<MouseCoordinateY
-						at="right"
-						orient="right"
-						displayFormat={format(".2f")} />
-					<LineSeries
-						yAccessor={d => d.close}
-						stroke="black" />
-					<ScatterSeries
-						yAccessor={d => d.close}
-						marker={CircleMarker}
-						markerProps={{ r: 3, fill: changeColor }} />
-					<OHLCTooltip forChart={1} origin={[-40, 0]}/>
-				</Chart>
+			<div>
+				<Input onChange={event => this.onChange} onSubmit={this.getData} />
+				<ChartCanvas ratio={ratio} width={width} height={400}
+						margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+						type={type}
+						pointsPerPxThreshold={1}
+						seriesName="MSFT"
+						data={data}
+						xAccessor={xAccessor}
+						displayXAccessor={displayXAccessor}
+						xScale={xScale}
+						xExtents={xExtents}>
+					<Chart id={1}
+							yExtents={d => [d.close]}>
+						<XAxis axisAt="bottom" orient="bottom"/>
+						<YAxis
+							axisAt="right"
+							orient="right"
+							// tickInterval={5}
+							// tickValues={[40, 60]}
+							ticks={5}
+						/>
+						<MouseCoordinateX
+							at="bottom"
+							orient="bottom"
+							displayFormat={timeFormat("%Y-%m-%d")} />
+						<MouseCoordinateY
+							at="right"
+							orient="right"
+							displayFormat={format(".2f")} />
+						<LineSeries
+							yAccessor={d => d.close}
+							stroke="black" />
+						<ScatterSeries
+							yAccessor={d => d.close}
+							marker={CircleMarker}
+							markerProps={{ r: 3, fill: changeColor }} />
+						<OHLCTooltip forChart={1} origin={[-40, 0]}/>
+					</Chart>
 
-				<CrossHairCursor />
-			</ChartCanvas>
-
+					<CrossHairCursor />
+				</ChartCanvas>
+			</div>
 		);
 	}
 }
