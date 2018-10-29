@@ -1,17 +1,18 @@
 import { tsvParse, csvParse, tsvParseRows, tsvParseColumns } from "d3-dsv";
 import { timeParse } from "d3-time-format";
+import { tsv } from "d3-fetch";
 
 const cloneDeep = require('lodash.clonedeep');
 
 
 function parseData(parse) {
     return function(d) {
-        d.date = parse(d.Epoch),
-            d.open = d.Open,
-            d.high = d.High,
-            d.low = d.Low,
-            d.close = d.Close,
-            d.volume = d.Volume
+        d.date = parse(d.Epoch);
+        d.open = +d.Open;
+        d.high = +d.High;
+        d.low = +d.Low;
+        d.close = +d.Close;
+        d.volume = +d.Volume;
         return d;
     };
 }
@@ -19,19 +20,14 @@ function parseData(parse) {
 const parseDate = timeParse("%Y-%m-%d %H:%M:%S%Z");
 
 export function getData() {
-
-    const promiseMSFT = fetch('http://127.0.0.1:5000/?exchange_symbol=binance-BTCUSDT&interval=1Min')
-        .then(res => res.text())
+    const promiseCompare = fetch("http://127.0.0.1:5000/?exchange_symbol=binance-BTCUSDT&interval=1Min")
+        .then(response => response.json())
         .then(data => tsvParse(data, d => {
-            // d = parseData(parseDate)(d);
+            d = parseData(parseDate)(d);
             return d;
-        }))
-        .catch(err => {
-            console.log(err);
-        });
-    return promiseMSFT;
+        }));
+    return promiseCompare;
 }
-
 
 
 // .then(res => {
