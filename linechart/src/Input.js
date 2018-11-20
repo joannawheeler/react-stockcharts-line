@@ -1,41 +1,97 @@
+<label>
+  Exchange:
+  <input type="text" value={this.state.value} onChange={this.handleChange} />
+</label>
 
-import React from "react";
-import PropTypes from "prop-types";
 
-class Input extends React.Component {
+
+        <TypeChooser>
+          {type => <Chart type={type} data={this.state.data} />}
+        </TypeChooser>
+
+
+
+const symbolsDropdown = this.state.symbols.map((symbol) =>
+  <option value={symbol}>{symbol}</option>
+);
+
+import React from 'react';
+import { render } from 'react-dom';
+import Chart from './Chart';
+import { getData, getSymbols } from "./utils";
+import Input from './Input'
+
+import { TypeChooser } from "react-stockcharts/lib/helper";
+
+class ChartComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {input: ''};
+    this.state = {
+      value: '',
+      data: null,
+      symbols: null
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
   handleChange(event) {
-    this.setState({input: event.target.input});
-    this.props.onValInput(this.state.input)
+    this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.input);
+    alert(this.state.value + ' submitted')
     event.preventDefault();
   }
 
+  componentDidMount() {
+    getData().then(data => {
+      // console.log(data);
+
+      console.log("getData(): " + data);
+      this.setState({ data });
+    });
+
+    getSymbols().then(symbols => {
+      console.log("getSymbols(): " + symbols);
+      this.setState({ symbols });
+    })
+  }
+
   render() {
+
+    const symbols = this.props.symbols;
+
+    const symbolsDropdown = symbols.map((symbol) =>
+      <option value={symbol}>{symbol}</option>
+    );
+
     return (
-      <form onSubmit={this.props.handleSubmit}>
-          <label>
-            Exchange Symbol:
-            <input type="text" name="name" value={this.state.input} onChange={event => this.props.onChange(event.target.value)} />
-          </label>
-          <label>
-            Interval:
-            <input type="text" name="name" value={this.state.input} onChange={this.handleChange} />
+      <div>
+
+        <form onSubmit={this.handleSubmit}>
+          <label>Exchange:
+              <select value="binance-BTCUSDT" onChange={this.handleChange}>
+              {symbolsDropdown}
+              </select>
           </label>
           <input type="submit" value="Submit" />
-      </form>
-    );
+        </form>
+
+        <TypeChooser>
+          {type => <Chart type={type} data={this.state.data} />}
+        </TypeChooser>
+      </div>
+    )
   }
 }
 
-export default Input;
+
+
+render(
+  <ChartComponent />,
+  document.getElementById("root")
+);
+
