@@ -1,0 +1,219 @@
+/************************************************/
+/* *******  HEADER BOTH LEFT AND RIGHT  ******* */
+/************************************************/
+
+.headerCol {
+  margin: 0px;
+  padding: 0px;
+  background-color: #44adef;
+}
+
+/**********************************/
+/* *******  HEADER RIGHT  ******* */
+/**********************************/
+
+/* container */
+.symbolBar {
+  /*  margin-left: 50px;
+  margin-right: 50px;*/
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+/* exchange container */
+.exchangeDropdownContainer {
+  padding-top: 23px;
+  background-color: #44adef;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* input where user enters current exchange */
+.currentExchange {
+  background-color: #44adef;
+  /*margin: 0 auto;*/
+  text-align: left;
+  /*padding-bottom: 0px;*/
+  margin: 0 !important;
+}
+
+/* ul exchange dropdown */
+/*.exchangesDropdown {
+  border: 'none';
+}*/
+
+/* ul exchange dropdown list */
+.exchangeList {
+  position: relative;
+  text-align: left;
+  list-style-type: none;
+  color: black;
+  z-index: 1;
+  background-color: #44adef;
+  margin: 0 auto;
+}
+
+/* li each item in exchange dropwdown list */
+.exchangeDropdownItem {
+  margin-top: 0;
+  text-align: left;
+}
+
+.exchangeValue {
+  text-align: left;
+}
+
+/* container for symbol input and it's dropdown  */
+.symbolInput {
+  /*  margin-left: 50px;
+  margin-right: 50px;*/
+  z-index: 1;
+  margin: 0 auto;
+  border-bottom: solid 1.5px;
+}
+
+/* symbol input */
+#input {
+  width: 100px;
+  font-size: 20px;
+  border: none;
+  color: black;
+  background-color: #44adef;
+  /*border-bottom: 5px solid;*/
+  border-style: solid;
+  border-width: thin;
+  border: none;
+  text-align: center;
+  z-index: 1;
+}
+
+/* symbol input placeholder */
+#input::placeholder {
+  color: black;
+}
+
+/* ul symbol dropdown */
+.symbolList {
+  position: absolute;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  /*  background: #ff9999;
+  border-style: solid;
+  border-width: thin;
+  border-color: grey;*/
+  background-color: #44adef;
+  height: 200px;
+  overflow: auto;
+  /*width: 300px;*/
+}
+
+/* li in ul symbol dropdown */
+.symbol {
+  color: black;
+  /*margin: 5px;*/
+  font-size: 20px;
+  z-index: 1;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*.selectedSymbol {
+  text-decoration: none;
+}*/
+
+/* li symbol on hover */
+.symbol:hover {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* interval dropdown */
+.interval {
+  /*  margin-left: 50px;
+  margin-right: 50px;*/
+  width: 100px;
+  font-size: 20px;
+  border: none;
+  /*border-bottom: 5px solid;*/
+  border-style: solid;
+  border-width: thin;
+  border-color: grey;
+  text-align: left;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+/* submit button */
+.submit {
+  /*  margin-left: 50px;
+  margin-right: 50px;*/
+  margin: 0 auto;
+  border: none;
+  background-color: #44adef;
+}
+
+/*********************************/
+/* *******  HEADER LEFT  ******* */
+/*********************************/
+
+.headerSymbol {
+  background-color: #44adef;
+  font-family: sans-serif;
+  padding-bottom: 20px;
+  padding-top: 23px;
+  padding-left: 20px;
+  margin: 0px;
+  /*padding-top: 30px;*/
+  font-size: 25px;
+}
+/*
+.headerInput {
+  background-color: #44adef;
+  font-family: sans-serif;
+  padding-bottom: 20px;
+  padding-top: 23px;
+  padding-left: 20px;
+  margin: 0px;
+  padding-top: 30px;
+  font-size: 25px;
+}*/
+
+/***************************/
+/* *******  CHART  ******* */
+/***************************/
+
+.wrapper {
+  pointer-events: none;
+  background: 'black';
+  background-color: 'black';
+  z-index: 0;
+}
+
+/*.fullPage {
+  background-color: 'blue';
+}*/
+
+.chartCol {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*.chartRow {
+}*/
+
+.white {
+  font-color: white;
+}
+
+.fixedHeight {
+  height: 80px;
+}
+
+.formInlineExchangesDropdown {
+  background-color: #44adef;
+}

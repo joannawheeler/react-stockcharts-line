@@ -1,8 +1,5 @@
-import { tsvParse, csvParse, tsvParseRows, tsvParseColumns } from "d3-dsv";
+import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
-import { tsv } from "d3-fetch";
-
-const cloneDeep = require('lodash.clonedeep');
 
 
 function parseData(parse) {
@@ -19,9 +16,10 @@ function parseData(parse) {
 
 const parseDate = timeParse("%Y-%m-%d %H:%M:%S%Z");
 
-export function getData() {
-    const promiseCompare = fetch("http://127.0.0.1:5000/?exchange_symbol=binance-BTCUSDT&interval=1Min")
+export function getData(value, interval) {
+    const promiseCompare = fetch("http://127.0.0.1:5000/?exchange_symbol=" + value + "&interval=" + interval)
         .then(response => response.json())
+        // .then(response => response.text())
         .then(data => tsvParse(data, d => {
             d = parseData(parseDate)(d);
             return d;
@@ -29,75 +27,8 @@ export function getData() {
     return promiseCompare;
 }
 
-
-// .then(res => {
-//     res = res['data']
-//     return res;
-// })
-// .then(res => {
-//     return res.body
-// })
-// .then(res => {
-//     return res.text();
-// })
-// .then(str => {
-//     const exitPoints = [];
-//     let currExitPoint = {};
-//     const parsedTrades = JSON.parse(str,
-//         function(key, value) {
-//             switch (key) {
-//                 case "entryText":
-//                     if (value != null) {
-//                         if (value === "BUY") {
-//                             currExitPoint.entryText = "SELL";
-//                         } else if (value === "SELL") {
-//                             currExitPoint.entryText = "BUY";
-//                         }
-//                     } else {
-//                         delete this.key;
-//                     }
-//                     return value;
-//                 case "entryTime":
-//                     if (value != null) {
-//                         this.date = new Date(value);
-//                         return value;
-//                     } else {
-//                         delete this.key;
-//                     }
-//                     return;
-//                 case "entryPrice":
-//                     if (value != null) {
-//                         this.close = value;
-//                     } else {
-//                         delete this.key;
-//                     }
-//                     return;
-//                 case "exitTime":
-//                     if (value != null) {
-//                         currExitPoint.date = new Date(value);
-//                         return value;
-//                     } else {
-//                         delete this.key;
-//                     }
-//                     return;
-//                 case "exitPrice":
-//                     if (value != null) {
-//                         currExitPoint.close = value;
-//                         const newExitPoint = cloneDeep(currExitPoint);
-//                         exitPoints.push(newExitPoint);
-//                     } else {
-//                         delete this.key;
-//                     }
-//                     return;
-//                 default:
-//                     return value;
-//             }
-//         });
-//     const trades = parsedTrades.concat(exitPoints);
-//     return trades;
-// })
-//         .catch(err => {
-//             console.log(err);
-//         });
-//     return promiseMSFT;
-// }
+export function getSymbols(exchange) {
+    const symbols = fetch("http://127.0.0.1:5000/symbols/" + exchange)
+        .then(response => response.json())
+    return symbols;
+}
