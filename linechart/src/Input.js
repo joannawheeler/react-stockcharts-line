@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Button, Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
 import Downshift from 'downshift';
 import ExchangeDropdown from './ExchangeDropdown';
+import IntervalDropdown from './IntervalDropdown';
 
 class Input extends React.Component {
   constructor(props) {
@@ -63,11 +64,6 @@ class Input extends React.Component {
               exchanges={this.state.exchanges}
               exchange={this.props.exchange}
               changeExchange={this.props.changeExchange}
-              // bsStyle="exchangesDropdown"
-              // options={this.state.exchanges}
-              // onChange={this.props.changeExchange}
-              // value={defaultOption}
-              // placeholder={this.props.exchange}
             />
           </FormGroup>{' '}
         </Col>
@@ -144,16 +140,19 @@ class Input extends React.Component {
             </Downshift>
           </FormGroup>{' '}
         </Col>
-        <Col className="headerCol" xs={12} sm={3} md={3} lg={3}>
+
+        <Col className="headerCol fixedHeight" xs={6} sm={3} md={3} lg={3}>
           <FormGroup controlId="formInlineIntervalInput">
-            <select defaultValue="1Min" onChange={this.props.handleIntervalChange} className="interval">
-              {intervalsDropdown}
-            </select>
+            <IntervalDropdown
+              intervals={this.state.intervals}
+              interval={this.props.interval}
+              handleIntervalChange={this.props.handleIntervalChange}
+            />
           </FormGroup>{' '}
         </Col>
         <Col className="headerCol" xs={12} sm={3} md={3} lg={3}>
           <div className="text-center">
-            <Button bsClass="submit" type="submit">
+            <Button bsStyle="link" style={{ textDecoration: 'none' }} type="submit" className="submit">
               Update
             </Button>
           </div>

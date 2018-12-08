@@ -33,8 +33,14 @@ class ChartComponent extends React.Component {
 		this.setState({ header: newHeader });
 	};
 
-	handleIntervalChange = event => {
-		this.setState({ interval: event.target.value });
+	// handleIntervalChange = event => {
+	// 	this.setState({ interval: event.target.value });
+	// };
+
+	handleIntervalChange = newInterval => {
+		this.setState({
+			interval: newInterval
+		});
 	};
 
 	changeExchange = newExchange => {
