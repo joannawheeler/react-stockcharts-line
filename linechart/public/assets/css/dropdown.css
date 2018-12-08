@@ -29,13 +29,17 @@
   text-align: left;
 }
 
-/* input where user enters current exchange */
+/* currently selected exchange */
 .currentExchange {
   background-color: #44adef;
   /*margin: 0 auto;*/
   text-align: left;
   /*padding-bottom: 0px;*/
   margin: 0 !important;
+}
+
+.currentExchange:hover {
+  color: white;
 }
 
 /* ul exchange dropdown */
@@ -60,9 +64,9 @@
   text-align: left;
 }
 
-.exchangeValue {
+/*.exchangeValue {
   text-align: left;
-}
+}*/
 
 /* container for symbol input and it's dropdown  */
 .symbolInput {
@@ -81,16 +85,29 @@
   color: black;
   background-color: #44adef;
   /*border-bottom: 5px solid;*/
-  border-style: solid;
-  border-width: thin;
   border: none;
   text-align: center;
   z-index: 1;
 }
 
+/* change color of symbol input on hover */
+.symbolInput:hover {
+  color: white;
+}
+
+/* removes border around input when its clicked to enter text into it */
+#input:focus {
+  outline: none;
+}
+
 /* symbol input placeholder */
 #input::placeholder {
   color: black;
+}
+
+/* change color of input placeholder on hovr */
+#input:hover::placeholder {
+  color: white;
 }
 
 /* ul symbol dropdown */
@@ -152,10 +169,16 @@
 .submit {
   /*  margin-left: 50px;
   margin-right: 50px;*/
+  color: white;
   margin: 0 auto;
   border: none;
   background-color: #44adef;
 }
+
+/* change submit button color on hover
+.submit:hover {
+  color: white;
+}*/
 
 /*********************************/
 /* *******  HEADER LEFT  ******* */
