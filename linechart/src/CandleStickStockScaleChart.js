@@ -6,7 +6,7 @@ import { timeFormat } from 'd3-time-format';
 
 import { ChartCanvas, Chart } from 'react-stockcharts';
 import { CandlestickSeries, RSISeries, BarSeries } from 'react-stockcharts/lib/series';
-import { XAxis, YAxis } from 'react-stockcharts/lib/axes';
+import { XAxis, YAxis, Axis } from 'react-stockcharts/lib/axes';
 import {
   CrossHairCursor,
   // EdgeIndicator,
@@ -14,30 +14,41 @@ import {
   MouseCoordinateX,
   MouseCoordinateY
 } from 'react-stockcharts/lib/coordinates';
-
+import { LabelAnnotation, Label, Annotate } from 'react-stockcharts/lib/annotation';
 import { discontinuousTimeScaleProvider } from 'react-stockcharts/lib/scale';
-import { RSITooltip, OHLCTooltip } from 'react-stockcharts/lib/tooltip';
 import { rsi } from 'react-stockcharts/lib/indicator';
 import { fitWidth } from 'react-stockcharts/lib/helper';
 import { last } from 'react-stockcharts/lib/utils';
 
 class CandleStickStockScaleChart extends React.Component {
   render() {
+    // const canvasMarginTop = 50;
+    const canvasMargin = { left: 80, right: 80, top: 50, bottom: 50 };
+
     const candleStickHeight = 200;
     const barHeight = 200;
-    const rsiHeight = 200;
-    const canvasHeight = 700;
+    const rsiHeight = 100;
     const tickFontSize = 15;
-    const tickFontWeight = 350;
+    const labelFontSize = 15;
+    const tickFontWeight = 250;
     const tickPadding = 20;
-
+    const barPaddingTop = 50;
+    const rsiPaddingTop = 50;
+    const canvasHeight =
+      canvasMargin.top +
+      candleStickHeight +
+      barPaddingTop +
+      barHeight +
+      rsiPaddingTop +
+      rsiHeight +
+      tickPadding +
+      canvasMargin.bottom;
     const rsiCalculator = rsi()
       .options({ windowSize: 14 })
       .merge((d, c) => {
         d.rsi = c;
       })
-      .accessor(d => d.rsi)
-      .stroke('#2B4073');
+      .accessor(d => d.rsi);
 
     const { type, data: initialData, width, ratio, cursorActive } = this.props;
 
@@ -52,33 +63,34 @@ class CandleStickStockScaleChart extends React.Component {
     //   xAccessor(data[data.length - 100])
     // ];
 
+    const gridWidth = width - canvasMargin.left - canvasMargin.right;
+
+    const showGrid = true;
+    const gridHeight = candleStickHeight + barPaddingTop + barHeight + rsiPaddingTop + rsiHeight;
+    const yGrid = showGrid
+      ? {
+          innerTickSize: -1 * gridWidth,
+          tickStrokeDasharray: 'ShortDash2',
+          tickStrokeOpacity: 0.1,
+          tickStrokeWidth: 2
+        }
+      : {};
+    const xGrid = function(gridHeight) {
+      return showGrid
+        ? {
+            innerTickSize: -1 * gridHeight,
+            tickStrokeDasharray: 'ShortDash2',
+            tickStrokeOpacity: 0.1,
+            tickStrokeWidth: 2
+          }
+        : {};
+    };
+
+    const labelXCoord = 0;
+
     const start = xAccessor(last(data));
     const end = xAccessor(data[Math.max(0, data.length - 150)]);
     const xExtents = [start, end];
-
-    var canvasMargin = { left: 70, right: 70, top: 20, bottom: 30 };
-    var gridHeight = canvasHeight - canvasMargin.top - canvasMargin.bottom;
-    var gridWidth = width - canvasMargin.left - canvasMargin.right;
-
-    var showGrid = true;
-    var yGrid = showGrid
-      ? {
-          innerTickSize: -1 * gridWidth,
-          tickStrokeDasharray: 'Dash',
-          tickStrokeOpacity: 0.1,
-          tickStrokeWidth: 1
-          // tickStroke: '#323232'
-        }
-      : {};
-    var xGrid = showGrid
-      ? {
-          innerTickSize: -1 * gridHeight,
-          tickStrokeDasharray: 'Dash',
-          tickStrokeOpacity: 0.1,
-          tickStrokeWidth: 1
-          // tickStroke: '#323232'
-        }
-      : {};
 
     return (
       <ChartCanvas
@@ -94,25 +106,40 @@ class CandleStickStockScaleChart extends React.Component {
         displayXAccessor={displayXAccessor}
         xExtents={xExtents}
         useCrossHairStyleCursor={cursorActive}>
-        <Chart
-          id={1}
-          height={candleStickHeight}
-          yExtents={[d => [d.high, d.low]]}
-          origin={(w, h) => [0, 20]}
-          // padding={{ top: 30, bottom: 30 }}
+        <Chart id={1} height={candleStickHeight} yExtents={[d => [d.high, d.low]]} origin={(w, h) => [0, 0]}>
+          <Label
+            x={labelXCoord}
+            y={-10}
+            fontSize={labelFontSize}
+            text="Value"
+            fill="white"
+            fontWeight={tickFontWeight + 100}
+            textAnchor="left"
+          />
 
-          // margin={{bottom: 50}}
-        >
-          <XAxis axisAt="bottom" orient="bottom" showTicks={false} showTickLabel={false} stroke="none" {...xGrid} />
+          <XAxis
+            axisAt="bottom"
+            orient="bottom"
+            outerTickSize={0}
+            tickLabelFill={'white'}
+            showTickLabel={false}
+            stroke="none"
+            fontSize={tickFontSize}
+            fontWeight={tickFontWeight}
+            stroke="#353535"
+            // tickPadding={tickPadding}
+            {...xGrid(candleStickHeight)}
+          />
 
           <YAxis
             axisAt="left"
             orient="left"
             ticks={5}
+            tickLabelFill={'white'}
+            tickFormat={format('.2s')}
             fontSize={tickFontSize}
             fontWeight={tickFontWeight}
-            stroke="none"
-            tickStroke="white"
+            stroke="#353535"
             tickPadding={tickPadding}
             {...yGrid}
           />
@@ -126,89 +153,109 @@ class CandleStickStockScaleChart extends React.Component {
             opacity={1}
           />
         </Chart>
+
         <Chart
           id={2}
           height={barHeight}
           yExtents={[d => d.volume]}
-          origin={(w, h) => [0, candleStickHeight]}
-          // padding={{ top: 30, bottom: 30 }}
-        >
+          origin={(w, h) => [0, candleStickHeight + barPaddingTop]}>
           <XAxis
             axisAt="bottom"
             orient="bottom"
             outerTickSize={0}
+            tickLabelFill={'white'}
+            showTickLabel={false}
             stroke="none"
             fontSize={tickFontSize}
             fontWeight={tickFontWeight}
-            stroke="none"
-            tickStroke="white"
-            tickPadding={tickPadding}
-            {...xGrid}
+            stroke="#353535"
+            // tickPadding={tickPadding}
+            {...xGrid(barPaddingTop + barHeight)}
           />
+
           <YAxis
             axisAt="left"
             orient="left"
             ticks={5}
+            tickLabelFill={'white'}
             tickFormat={format('.2s')}
             fontSize={tickFontSize}
             fontWeight={tickFontWeight}
-            stroke="none"
-            tickStroke="white"
+            stroke="#353535"
             tickPadding={tickPadding}
             {...yGrid}
           />
 
           <MouseCoordinateY at="left" orient="left" displayFormat={format('.4s')} zIndex={-1} />
+          <Label
+            x={labelXCoord}
+            y={candleStickHeight + barPaddingTop - 10}
+            fontSize={labelFontSize}
+            text="Volume"
+            fill="white"
+            textAnchor="left"
+          />
 
           <BarSeries yAccessor={d => d.volume} fill={'#2B4073'} stroke={false} opacity={1} />
         </Chart>
+
         <Chart
           id={3}
           yExtents={[0, 100]}
           height={rsiHeight}
-          origin={(w, h) => [0, candleStickHeight + barHeight + tickPadding * 2]}
-          // padding={{ top: 30, bottom: 30 }}
-        >
+          origin={(w, h) => [0, candleStickHeight + barPaddingTop + 15 + barHeight + rsiPaddingTop]}>
           <XAxis
-            className="white"
             axisAt="bottom"
             orient="bottom"
             outerTickSize={0}
-            fontSize={tickFontSize}
+            tickLabelFill={'white'}
+            fontSize={tickFontSize - 2}
             fontWeight={tickFontWeight}
-            stroke="none"
-            tickStroke="white"
-            // tickPadding={tickPadding}
-            {...xGrid}
+            stroke="#353535"
+            tickPadding={tickPadding}
+            {...xGrid(tickPadding * 2 + rsiHeight + rsiPaddingTop)}
           />
+
           <YAxis
             axisAt="right"
             orient="right"
-            tickValues={[30, 50, 70]}
+            tickValues={[10, 30, 50, 70, 90]}
+            tickLabelFill={'white'}
             fontSize={tickFontSize}
             fontWeight={tickFontWeight}
-            stroke="none"
-            tickStroke="white"
+            stroke="#353535"
             tickPadding={tickPadding}
+            tickFormat={format('.2s')}
             {...yGrid}
           />
 
           <MouseCoordinateX at="bottom" orient="bottom" displayFormat={timeFormat('%Y-%m-%d')} />
           <MouseCoordinateY at="right" orient="right" displayFormat={format('.2f')} />
 
+          <Label
+            x={labelXCoord}
+            y={candleStickHeight + barPaddingTop + barHeight + rsiPaddingTop - 10}
+            fontSize={labelFontSize}
+            text="RSI"
+            fill="white"
+            textAnchor="left"
+          />
           <RSISeries
             yAccessor={d => d.rsi}
             strokeDasharray={{
-              line: 'none',
-              top: 'none',
-              middle: 'none',
-              bottom: 'none'
+              line: 'Solid',
+              top: 'Solid',
+              middle: 'Solid',
+              bottom: 'Solid'
             }}
             stroke={{
-              line: 'white',
-              top: 'none',
-              middle: 'none',
-              bottom: 'none'
+              outsideThreshold: 'white',
+              insideThreshold: 'white'
+            }}
+            opacity={{
+              top: '0',
+              middle: '0',
+              bottom: '0'
             }}
           />
         </Chart>

@@ -1,4 +1,5 @@
 ### Pre req
+
 node 6+
 
 npm 3+
@@ -36,4 +37,12 @@ $ cd linechart
 $ npm install
 $ npm start
 
+```
+
+```
+cd react-stockcharts-line
+cd mkserver
+source venv/bin/activate
+python3 app.py
+(If error messages come up like 'ImportError: No module named flask' then 'sudo -H pip3 install flask' and keep installing each module it gives an ImportError for)
 ```

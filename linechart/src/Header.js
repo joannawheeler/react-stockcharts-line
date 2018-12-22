@@ -6,10 +6,15 @@ class Header extends React.Component {
   render() {
     return (
       <Row className="show-grid fixedHeight">
-        <Col className="headerCol" xs={12} sm={12} md={4} lg={4}>
-          <h1 className="headerSymbol">{this.props.header}</h1>
+        <Col className="headerCol customWidthLeftHeader " xs={2} sm={2} md={4} lg={4}>
+          <div
+            style={{
+              paddingTop: '23px'
+            }}>
+            <div className="headerSymbol">{this.props.header}</div>
+          </div>
         </Col>
-        <Col className="headerCol" xs={12} sm={12} md={8} lg={8}>
+        <Col className="headerCol" xs={10} sm={10} md={8} lg={8}>
           <Input
             interval={this.props.interval}
             symbols={this.props.symbols}
@@ -21,6 +26,8 @@ class Header extends React.Component {
             toggleCursor={this.props.toggleCursor}
             setData={this.props.setData}
             cursorActivator={this.props.cursorActivator}
+            clearPlaceholder={this.props.clearPlaceholder}
+            placeholder={this.props.placeholder}
           />
         </Col>
       </Row>
