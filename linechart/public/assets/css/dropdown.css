@@ -8,6 +8,33 @@
   background-color: #44adef;
 }
 
+/*********************************/
+/* *******  HEADER LEFT  ******* */
+/*********************************/
+
+.headerSymbol {
+  position: relative;
+  background-color: #44adef;
+  font-family: sans-serif;
+  /*padding-bottom: 80/2;*/
+  /*padding-top: 25px;*/
+  padding-left: 20px;
+  margin: 0px;
+  /*padding-top: 30px;*/
+  /*font-size: 25px;*/
+}
+/*
+.headerInput {
+  background-color: #44adef;
+  font-family: sans-serif;
+  padding-bottom: 20px;
+  padding-top: 23px;
+  padding-left: 20px;
+  margin: 0px;
+  padding-top: 30px;
+  font-size: 25px;
+}*/
+
 /**********************************/
 /* *******  HEADER RIGHT  ******* */
 /**********************************/
@@ -18,28 +45,30 @@
   margin-right: 50px;*/
   margin: 0;
   padding: 0;
-  font-size: 20px;
+
+  /*font-size: 20px;*/
 }
 
 /* exchange container */
 .exchangeDropdownContainer {
-  padding-top: 23px;
+  padding-top: 25px;
   background-color: #44adef;
   margin: 0 auto;
-  text-align: left;
 }
 
 /* currently selected exchange */
 .currentExchange {
   background-color: #44adef;
+  padding: 0;
   /*margin: 0 auto;*/
-  text-align: left;
   /*padding-bottom: 0px;*/
   margin: 0 !important;
 }
 
 .currentExchange:hover {
   color: white;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* ul exchange dropdown */
@@ -50,18 +79,28 @@
 /* ul exchange dropdown list */
 .exchangeList {
   position: relative;
-  text-align: left;
   list-style-type: none;
   color: black;
   z-index: 1;
-  background-color: #44adef;
-  margin: 0 auto;
+  /*background-color: #44adef;*/
+  background-color: white;
+  border: solid 2px #44adef;
+  border-radius: 6px;
+  padding: 0;
+  /*margin: 0 auto;*/
 }
 
 /* li each item in exchange dropwdown list */
-.exchangeDropdownItem {
+.dropdownItem {
+  padding: 0;
   margin-top: 0;
-  text-align: left;
+  cursor: pointer;
+  /*margin-right: 5px;*/
+}
+
+.dropdownItem:hover {
+  background-color: lightgrey;
+  opacity: 1;
 }
 
 /*.exchangeValue {
@@ -72,28 +111,40 @@
 .symbolInput {
   /*  margin-left: 50px;
   margin-right: 50px;*/
+  width: 110px;
   z-index: 1;
   margin: 0 auto;
   border-bottom: solid 1.5px;
 }
 
+/*.symbolInput:hover {*/
+/*color: white;*/
+/*border-bottom: solid white 1.5px;*/
+/*}*/
+
 /* symbol input */
 #input {
-  width: 100px;
-  font-size: 20px;
+  width: 110px;
+  /*font-size: 20px;*/
   border: none;
-  color: black;
+  /*color: black;*/
   background-color: #44adef;
   /*border-bottom: 5px solid;*/
-  border: none;
-  text-align: center;
+  /*text-align: center;*/
   z-index: 1;
+  text-transform: uppercase;
+}
+
+#input:hover {
+  /*color: white;*/
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* change color of symbol input on hover */
-.symbolInput:hover {
+/*.symbolInput:hover {
   color: white;
-}
+}*/
 
 /* removes border around input when its clicked to enter text into it */
 #input:focus {
@@ -117,29 +168,38 @@
   margin: 0;
   padding: 0;
   z-index: 1;
-  /*  background: #ff9999;
-  border-style: solid;
-  border-width: thin;
-  border-color: grey;*/
-  background-color: #44adef;
-  height: 200px;
+  background-color: white;
   overflow: auto;
-  /*width: 300px;*/
+  width: 116px;
+  transform: translate(-3px, -4px);
+
+  /*
+  position: absolute;
+  list-style-type: none;
+  color: black;
+  z-index: 1;
+  background-color: #44adef;
+  background-color: white;
+  border: solid 2px #44adef;
+  border-radius: 6px;
+  padding: 0;
+  width: 125px;*/
 }
 
 /* li in ul symbol dropdown */
 .symbol {
   color: black;
   /*margin: 5px;*/
-  font-size: 20px;
+  /*font-size: 18px;*/
   z-index: 1;
   position: relative;
   text-decoration: none;
   cursor: pointer;
 }
 
-/*.selectedSymbol {
+/*.selectedSymbol:hover {
   text-decoration: none;
+  color: white;
 }*/
 
 /* li symbol on hover */
@@ -154,89 +214,180 @@
   /*  margin-left: 50px;
   margin-right: 50px;*/
   width: 100px;
-  font-size: 20px;
-  border: none;
-  /*border-bottom: 5px solid;*/
-  border-style: solid;
-  border-width: thin;
-  border-color: grey;
-  text-align: left;
+  /*font-size: 20px;*/
   z-index: 1;
   margin: 0 auto;
+}
+
+.interval:hover {
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* submit button */
 .submit {
   /*  margin-left: 50px;
   margin-right: 50px;*/
-  color: white;
+  color: black;
   margin: 0 auto;
-  border: none;
+  border: 1px solid black;
+  border-radius: 10px;
   background-color: #44adef;
+  /*font-size: 5px;*/
 }
 
-/* change submit button color on hover
+/*change submit button color on hover*/
 .submit:hover {
-  color: white;
-}*/
-
-/*********************************/
-/* *******  HEADER LEFT  ******* */
-/*********************************/
-
-.headerSymbol {
-  background-color: #44adef;
-  font-family: sans-serif;
-  padding-bottom: 20px;
-  padding-top: 23px;
-  padding-left: 20px;
-  margin: 0px;
-  /*padding-top: 30px;*/
-  font-size: 25px;
+  color: #44adef;
+  font-weight: bold;
+  background-color: white;
 }
-/*
-.headerInput {
-  background-color: #44adef;
-  font-family: sans-serif;
-  padding-bottom: 20px;
-  padding-top: 23px;
-  padding-left: 20px;
-  margin: 0px;
-  padding-top: 30px;
-  font-size: 25px;
-}*/
 
 /***************************/
 /* *******  CHART  ******* */
 /***************************/
-
-.wrapper {
-  pointer-events: none;
-  background: 'black';
-  background-color: 'black';
-  z-index: 0;
-}
-
-/*.fullPage {
-  background-color: 'blue';
-}*/
 
 .chartCol {
   margin: 0px;
   padding: 0px;
 }
 
-/*.chartRow {
-}*/
-
 .white {
   font-color: white;
 }
 
-.fixedHeight {
-  height: 80px;
+/***********************************/
+/* *******  MEDIA QUERIES  ******* */
+/***********************************/
+
+@media (min-width: 0px) {
+  .headerSymbol {
+    font-size: 17px;
+  }
+
+  #input {
+    font-size: 15px;
+  }
+  .symbol {
+    font-size: 15px;
+  }
+  .exchangeDropdownContainer {
+    font-size: 15px;
+  }
+  .submit {
+    font-size: 15px;
+    width: 70px;
+    padding: 3px;
+  }
+
+  .symbolInput {
+    width: 80px;
+  }
+
+  .headerCol {
+    float: left;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .headerSymbol {
+    font-size: 17px;
+  }
+
+  #input {
+    font-size: 15px;
+  }
+
+  .symbol {
+    font-size: 15px;
+  }
+  .exchangeDropdownContainer {
+    font-size: 15px;
+  }
+  .submit {
+    font-size: 15px;
+    width: 70px;
+    padding: 3px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .fixedHeight {
+    height: 80px;
+  }
+
+  .headerSymbol {
+    font-size: 25px;
+  }
+
+  #input {
+    font-size: 17px;
+  }
+
+  .symbol {
+    font-size: 17px;
+  }
+
+  .exchangeDropdownContainer {
+    font-size: 17px;
+  }
+
+  .submit {
+    font-size: 17px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .headerSymbol {
+    font-size: 25px;
+  }
+
+  #input {
+    font-size: 17px;
+  }
+
+  .symbol {
+    font-size: 17px;
+  }
+
+  .exchangeDropdownContainer {
+    font-size: 17px;
+  }
+  .submit {
+    font-size: 17px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .headerSymbol {
+    font-size: 25px;
+  }
+
+  #input {
+    font-size: 17px;
+  }
+
+  .symbol {
+    font-size: 17px;
+  }
+
+  .exchangeDropdownContainer {
+    font-size: 17px;
+  }
+  .submit {
+    font-size: 17px;
+  }
 }
 
 .formInlineExchangesDropdown {
   background-color: #44adef;
+}
+
+.chart {
+  position: absolute;
+  z-index: 1;
 }

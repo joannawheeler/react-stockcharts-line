@@ -1,6 +1,5 @@
-import { tsvParse } from "d3-dsv";
-import { timeParse } from "d3-time-format";
-
+import { tsvParse } from 'd3-dsv';
+import { timeParse } from 'd3-time-format';
 
 function parseData(parse) {
     return function(d) {
@@ -14,21 +13,24 @@ function parseData(parse) {
     };
 }
 
-const parseDate = timeParse("%Y-%m-%d %H:%M:%S%Z");
+const parseDate = timeParse('%Y-%m-%d %H:%M:%S%Z');
 
 export function getData(value, interval) {
-    const promiseCompare = fetch("http://127.0.0.1:5000/?exchange_symbol=" + value + "&interval=" + interval)
+    const promiseCompare = fetch('http://127.0.0.1:5000/?exchange_symbol=' + value + '&interval=' + interval)
         .then(response => response.json())
         // .then(response => response.text())
-        .then(data => tsvParse(data, d => {
-            d = parseData(parseDate)(d);
-            return d;
-        }));
+        .then(data =>
+            tsvParse(data, d => {
+                d = parseData(parseDate)(d);
+                return d;
+            })
+        )
+        .catch(error => console.log(error));
+
     return promiseCompare;
 }
 
 export function getSymbols(exchange) {
-    const symbols = fetch("http://127.0.0.1:5000/symbols/" + exchange)
-        .then(response => response.json())
+    const symbols = fetch('http://127.0.0.1:5000/symbols/' + exchange).then(response => response.json());
     return symbols;
 }

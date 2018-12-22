@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import CandleStickStockScaleChart from './CandleStickStockScaleChart';
+// import CandleStickStockScaleChart from './CandleStickStockScaleChart';
 import { getData, getSymbols } from './utils';
-import Input from './Input';
-import Header from './Header';
+// import Input from './Input';
+// import Header from './Header';
 import ChartContainer from './ChartContainer';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 import 'react-dropdown/style.css';
 
 // import { TypeChooser } from "react-stockcharts/lib/helper";
@@ -20,7 +20,8 @@ class ChartComponent extends React.Component {
 			data: null,
 			symbols: null,
 			header: 'BTCUSDT',
-			cursorActive: true
+			cursorActive: true,
+			placeholder: 'BTCUSDT'
 		};
 	}
 
@@ -29,31 +30,20 @@ class ChartComponent extends React.Component {
 		this.getTheSymbols(this.state.exchange);
 	};
 
+	clearPlaceholder = () => {
+		this.setState({
+			placeholder: '',
+			value: ''
+		});
+	};
+
 	changeHeader = newHeader => {
 		this.setState({ header: newHeader });
 	};
 
-	// handleIntervalChange = event => {
-	// 	this.setState({ interval: event.target.value });
-	// };
-
 	handleIntervalChange = newInterval => {
 		this.setState({
 			interval: newInterval
-		});
-	};
-
-	changeExchange = newExchange => {
-		this.setState({
-			exchange: newExchange
-		});
-		this.setValue('');
-		this.getTheSymbols(newExchange);
-	};
-
-	setValue = value => {
-		this.setState({
-			value: value
 		});
 	};
 
@@ -79,10 +69,15 @@ class ChartComponent extends React.Component {
 			});
 	};
 
+	changeExchange = newExchange => {
+		this.setState({
+			exchange: newExchange
+		});
+		this.handleSymbolChange('');
+		this.getTheSymbols(newExchange);
+	};
+
 	setData = () => {
-		console.log('exchange: ' + this.state.exchange);
-		console.log('value: ' + this.state.value);
-		console.log('interval: ' + this.state.interval);
 		let fullSymbol = this.state.exchange + '-' + this.state.value;
 		getData(fullSymbol, this.state.interval).then(data => {
 			this.setState({ data });
@@ -103,7 +98,6 @@ class ChartComponent extends React.Component {
 					changeExchange={this.changeExchange}
 					handleSymbolChange={this.handleSymbolChange}
 					toggleCursor={this.toggleCursor}
-					setData={this.setData}
 					interval={this.state.interval}
 					cursorActivator={this.cursorActivator}
 					symbols={this.state.symbols}
@@ -113,6 +107,8 @@ class ChartComponent extends React.Component {
 					data={this.state.data}
 					header={this.state.header}
 					cursorActive={this.state.cursorActive}
+					clearPlaceholder={this.clearPlaceholder}
+					placeholder={this.state.placeholder}
 				/>
 			</Grid>
 		);
