@@ -43,26 +43,48 @@
 .symbolBar {
   /*  margin-left: 50px;
   margin-right: 50px;*/
-  margin: 0;
-  padding: 0;
+  /*margin: 0;*/
+  /*padding: 0;*/
 
   /*font-size: 20px;*/
 }
 
+/**************************************/
+/* *******  Exchange Dropdown ******* */
+/**************************************/
+
 /* exchange container */
 .exchangeDropdownContainer {
-  padding-top: 25px;
-  background-color: #44adef;
-  margin: 0 auto;
+  /*padding-top: 25px;*/
+  /*background-color: #44adef;*/
+  /*margin: 0 auto; */
+  /*float: none;*/
+  display: flex;
+  align-items: center;
+  /*background-color: white;*/
+  /*height: 110px;*/
+  justify-content: center;
+  /*height: 105px;*/
+  flex-direction: column;
+  /*width: 200px;*/
+}
+
+.innerDropdownContainer {
+  /*width: 100%;*/
+  /*background-color: white;*/
+  /*width: 20px;*/
+  /*height: 50px;*/
+  /*max-width: 50%;*/
+  display: flex;
+  align-items: left;
+  /*background-color: white;*/
+  /*height: 110px;*/
+  justify-content: center;
+  flex-direction: column;
 }
 
 /* currently selected exchange */
 .currentExchange {
-  background-color: #44adef;
-  padding: 0;
-  /*margin: 0 auto;*/
-  /*padding-bottom: 0px;*/
-  margin: 0 !important;
 }
 
 .currentExchange:hover {
@@ -71,14 +93,9 @@
   font-weight: bold;
 }
 
-/* ul exchange dropdown */
-/*.exchangesDropdown {
-  border: 'none';
-}*/
-
 /* ul exchange dropdown list */
 .exchangeList {
-  position: relative;
+  /*position: relative;*/
   list-style-type: none;
   color: black;
   z-index: 1;
@@ -86,16 +103,16 @@
   background-color: white;
   border: solid 2px #44adef;
   border-radius: 6px;
-  padding: 0;
+  /*padding: 0;*/
   /*margin: 0 auto;*/
 }
 
 /* li each item in exchange dropwdown list */
 .dropdownItem {
-  padding: 0;
-  margin-top: 0;
+  /*  padding: 0;
+  margin-top: 0;*/
   cursor: pointer;
-  /*margin-right: 5px;*/
+  text-align: left;
 }
 
 .dropdownItem:hover {
@@ -103,9 +120,9 @@
   opacity: 1;
 }
 
-/*.exchangeValue {
-  text-align: left;
-}*/
+/**************************************/
+/* *******  Symbol Input ************ */
+/**************************************/
 
 /* container for symbol input and it's dropdown  */
 .symbolInput {
@@ -113,8 +130,8 @@
   margin-right: 50px;*/
   width: 110px;
   z-index: 1;
-  margin: 0 auto;
-  border-bottom: solid 1.5px;
+  /*margin: 0 auto;*/
+  /*border-bottom: solid 1.5px;*/
 }
 
 /*.symbolInput:hover {*/
@@ -124,6 +141,7 @@
 
 /* symbol input */
 #input {
+  /*text-align: left;*/
   width: 110px;
   /*font-size: 20px;*/
   border: none;
@@ -195,6 +213,7 @@
   position: relative;
   text-decoration: none;
   cursor: pointer;
+  /*text-align: left;*/
 }
 
 /*.selectedSymbol:hover {
@@ -213,10 +232,10 @@
 .interval {
   /*  margin-left: 50px;
   margin-right: 50px;*/
-  width: 100px;
+  /*width: 400px;*/
   /*font-size: 20px;*/
-  z-index: 1;
-  margin: 0 auto;
+  /*z-index: 1;*/
+  /*margin: 0 auto;*/
 }
 
 .interval:hover {
@@ -229,7 +248,7 @@
   /*  margin-left: 50px;
   margin-right: 50px;*/
   color: black;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
   border: 1px solid black;
   border-radius: 10px;
   background-color: #44adef;

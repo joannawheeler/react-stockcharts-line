@@ -5,12 +5,10 @@ import Input from './Input';
 class Header extends React.Component {
   render() {
     return (
-      <Row className="show-grid fixedHeight">
-        <Col className="headerCol customWidthLeftHeader " xs={2} sm={2} md={4} lg={4}>
-          <div
-            style={{
-              paddingTop: '23px'
-            }}>
+      // <Row className="show-grid fixedHeight">
+      <Row className="show-grid">
+        <Col className="headerCol" xs={2} sm={2} md={4} lg={4}>
+          <div>
             <div className="headerSymbol">{this.props.header}</div>
           </div>
         </Col>
