@@ -35,11 +35,15 @@ class IntervalDropdown extends React.Component {
 
     return (
       <div className="exchangeDropdownContainer" onClick={this.showDropdownItems}>
-        <p className="currentExchange" onClick={this.showDropdownItems}>
-          {this.props.interval} &nbsp;
-          <i className="fas fa-caret-down" />
-        </p>
-        {this.state.dropdownItems ? <ul className="exchangeList">{intervalsDropdown}</ul> : null}
+        <div className="innerDropdownContainer">
+          <div className="currentExchange" style={{ width: '400px' }} onClick={this.showDropdownItems}>
+            {this.props.interval} &nbsp;
+            <i className="fas fa-caret-down" />
+          </div>
+          <ul className="exchangeList" style={{ width: '40px' }}>
+            {this.state.dropdownItems ? intervalsDropdown : null}
+          </ul>
+        </div>
       </div>
     );
   }

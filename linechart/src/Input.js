@@ -9,7 +9,7 @@ class Input extends React.Component {
     super(props);
     this.state = {
       exchanges: ['binance', 'gdax'],
-      intervals: ['1Min', '2Min', '1Hr'],
+      intervals: ['1Min', '2Min', '1Hr', '2Hr'],
       toggle: true,
       symbolColor: 'black'
     };
@@ -67,20 +67,18 @@ class Input extends React.Component {
     let symbolItems = [];
     return (
       <Form inline onSubmit={this.submit} className="symbolBar">
-        <Col className="headerCol fixedHeight customWidthExchange" xs={3} sm={3} md={3} lg={3}>
+        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
           <FormGroup>
             <ExchangeDropdown
               exchanges={this.state.exchanges}
               exchange={this.props.exchange}
               changeExchange={this.props.changeExchange}
-              clearPlaceholder={this.props.clearPlaceholder}
-              placeholder={this.props.placeholder}
               handleSymbolChange={this.props.handleSymbolChange}
             />
-          </FormGroup>{' '}
+          </FormGroup>
         </Col>
 
-        <Col className="headerCol customWidthSymbolInput" xs={3} sm={3} md={3} lg={3}>
+        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
           <FormGroup>
             {this.props.symbols !== null ? (
               <Downshift
@@ -165,24 +163,23 @@ class Input extends React.Component {
                 )}
               </Downshift>
             ) : null}
-          </FormGroup>{' '}
+          </FormGroup>
         </Col>
 
-        <Col className="headerCol fixedHeight customWidthInterval" xs={3} sm={3} md={3} lg={3}>
-          <FormGroup controlId="formInlineIntervalInput">
+        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
+          <FormGroup controlId="">
             <IntervalDropdown
               intervals={this.state.intervals}
               interval={this.props.interval}
               handleIntervalChange={this.props.handleIntervalChange}
             />
-          </FormGroup>{' '}
+          </FormGroup>
         </Col>
-        <Col className="headerCol customWidthButton" xs={3} sm={3} md={3} lg={3}>
-          <div className="text-center">
-            <Button bsStyle="link" style={{ textDecoration: 'none' }} type="submit" className="submit">
-              Update
-            </Button>
-          </div>
+
+        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
+          <Button bsStyle="link" style={{ textDecoration: 'none' }} type="submit" className="submit">
+            Update
+          </Button>
         </Col>
       </Form>
     );

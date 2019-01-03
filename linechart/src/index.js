@@ -30,13 +30,6 @@ class ChartComponent extends React.Component {
 		this.getTheSymbols(this.state.exchange);
 	};
 
-	clearPlaceholder = () => {
-		this.setState({
-			placeholder: '',
-			value: ''
-		});
-	};
-
 	changeHeader = newHeader => {
 		this.setState({ header: newHeader });
 	};
@@ -47,8 +40,8 @@ class ChartComponent extends React.Component {
 		});
 	};
 
-	handleSymbolChange = event => {
-		this.setState({ value: event });
+	handleSymbolChange = newExchange => {
+		this.setState({ value: newExchange });
 	};
 
 	getTheSymbols = exchange => {

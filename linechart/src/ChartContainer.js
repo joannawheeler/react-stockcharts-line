@@ -35,7 +35,7 @@ class ChartContainer extends React.Component {
           clearPlaceholder={this.props.clearPlaceholder}
           placeholder={this.props.placeholder}
         />
-        <Row className="chartRow">
+        <Row className="chartRow fixedHeight">
           <Col className="chartCol" xs={12} sm={12} md={12} lg={12}>
             <div style={{ backgroundColor: '#353535', position: 'relative', zIndex: 0 }}>{chart}</div>
           </Col>

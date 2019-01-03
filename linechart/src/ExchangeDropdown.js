@@ -25,21 +25,20 @@ class ExchangeDropdown extends React.Component {
           changeValue={this.props.changeExchange}
           value={exchange}
           showDropdownItems={this.showDropdownItems}
-          clearPlaceholder={this.props.clearPlaceholder}
           type={'exchange'}
-          placeholder={this.props.placeholder}
-          handleSymbolChange={this.props.handleSymbolChange}
         />
       )
     );
 
     return (
       <div className="exchangeDropdownContainer" onClick={this.showDropdownItems}>
-        <span className="currentExchange" onClick={this.showDropdownItems}>
-          {this.props.exchange} &nbsp;
-          <i className="fas fa-caret-down" />
-        </span>
-        <ul className="exchangeList">{this.state.dropdownItems ? exchangesDropdown : null}</ul>
+        <div className="innerDropdownContainer">
+          <div className="currentExchange" onClick={this.showDropdownItems}>
+            {this.props.exchange} &nbsp;
+            <i className="fas fa-caret-down" />
+          </div>
+          <ul className="exchangeList">{this.state.dropdownItems ? exchangesDropdown : null}</ul>
+        </div>
       </div>
     );
   }
