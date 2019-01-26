@@ -7,12 +7,12 @@ class Header extends React.Component {
     return (
       // <Row className="show-grid fixedHeight">
       <Row className="show-grid">
-        <Col className="headerCol" xs={2} sm={2} md={4} lg={4}>
-          <div>
+        <Col className="headerCol" xs={12} sm={2} md={4} lg={4}>
+          <div className="headerContainer">
             <div className="headerSymbol">{this.props.header}</div>
           </div>
         </Col>
-        <Col className="headerCol" xs={10} sm={10} md={8} lg={8}>
+        <Col className="headerCol" xs={12} sm={10} md={8} lg={8}>
           <Input
             interval={this.props.interval}
             symbols={this.props.symbols}

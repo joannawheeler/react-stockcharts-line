@@ -6,34 +6,37 @@
   margin: 0px;
   padding: 0px;
   background-color: #44adef;
+  /*background-color: pink;*/
+  /*border: solid black;*/
 }
 
 /*********************************/
 /* *******  HEADER LEFT  ******* */
 /*********************************/
 
+.innerHeaderColumns {
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  height: 50px;
+}
+
 .headerSymbol {
-  position: relative;
-  background-color: #44adef;
+  /*position: relative;*/
+  /*background-color: #44adef;*/
   font-family: sans-serif;
   /*padding-bottom: 80/2;*/
   /*padding-top: 25px;*/
-  padding-left: 20px;
-  margin: 0px;
+  /*padding-left: 20px;*/
+  /*margin: 0px;*/
+  /*  margin: auto;
+  margin-left: 30px;*/
+
   /*padding-top: 30px;*/
   /*font-size: 25px;*/
 }
-/*
-.headerInput {
-  background-color: #44adef;
-  font-family: sans-serif;
-  padding-bottom: 20px;
-  padding-top: 23px;
-  padding-left: 20px;
-  margin: 0px;
-  padding-top: 30px;
-  font-size: 25px;
-}*/
 
 /**********************************/
 /* *******  HEADER RIGHT  ******* */
@@ -60,31 +63,37 @@
   /*margin: 0 auto; */
   /*float: none;*/
   display: flex;
-  align-items: center;
   /*background-color: white;*/
   /*height: 110px;*/
-  justify-content: center;
+  /*justify-content: flex-end;*/
   /*height: 105px;*/
-  flex-direction: column;
+  /*flex-direction: column;*/
+  align-items: center;
+  margin: 0 auto;
   /*width: 200px;*/
+  /*height: 200px;*/
+  /*background-color: yellow;*/
+  height: 50px;
+  align-items: center;
+  /*margin: auto;*/
 }
 
 .innerDropdownContainer {
-  /*width: 100%;*/
-  /*background-color: white;*/
-  /*width: 20px;*/
-  /*height: 50px;*/
-  /*max-width: 50%;*/
-  display: flex;
-  align-items: left;
-  /*background-color: white;*/
-  /*height: 110px;*/
+  /*display: flex;*/
   justify-content: center;
-  flex-direction: column;
+  /*  flex-direction: column;*/
+  /*top: px;*/
+  /*position: absolute;*/
+
+  /*margin: auto;*/
+
+  position: relative;
+  /*background-color: red;*/
 }
 
 /* currently selected exchange */
 .currentExchange {
+  /*margin: auto;*/
 }
 
 .currentExchange:hover {
@@ -93,9 +102,12 @@
   font-weight: bold;
 }
 
+.exchangeListContainer {
+}
+
 /* ul exchange dropdown list */
 .exchangeList {
-  /*position: relative;*/
+  position: absolute;
   list-style-type: none;
   color: black;
   z-index: 1;
@@ -103,7 +115,8 @@
   background-color: white;
   border: solid 2px #44adef;
   border-radius: 6px;
-  /*padding: 0;*/
+  padding: 0;
+  width: 100%;
   /*margin: 0 auto;*/
 }
 
@@ -252,7 +265,6 @@
   border: 1px solid black;
   border-radius: 10px;
   background-color: #44adef;
-  /*font-size: 5px;*/
 }
 
 /*change submit button color on hover*/
@@ -260,6 +272,7 @@
   color: #44adef;
   font-weight: bold;
   background-color: white;
+  margin: 0 auto;
 }
 
 /***************************/
@@ -282,6 +295,11 @@
 @media (min-width: 0px) {
   .headerSymbol {
     font-size: 17px;
+    margin: 0 auto;
+  }
+
+  .headerContainer {
+    height: 50px;
   }
 
   #input {
@@ -292,19 +310,10 @@
   }
   .exchangeDropdownContainer {
     font-size: 15px;
+    height: 50px;
   }
   .submit {
     font-size: 15px;
-    width: 70px;
-    padding: 3px;
-  }
-
-  .symbolInput {
-    width: 80px;
-  }
-
-  .headerCol {
-    float: left;
   }
 }
 
@@ -312,33 +321,40 @@
 @media (min-width: 576px) {
   .headerSymbol {
     font-size: 17px;
+    margin: auto;
+    margin-left: 10px;
+  }
+
+  .headerContainer {
+    height: 50px;
   }
 
   #input {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .symbol {
-    font-size: 15px;
+    font-size: 17px;
   }
   .exchangeDropdownContainer {
     font-size: 15px;
+    height: 50px;
   }
   .submit {
     font-size: 15px;
-    width: 70px;
-    padding: 3px;
+    padding: 4px 6px;
   }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-  .fixedHeight {
-    height: 80px;
+  .headerSymbol {
+    font-size: 17px;
+    margin-left: 30px;
   }
 
-  .headerSymbol {
-    font-size: 25px;
+  .headerContainer {
+    height: 50px;
   }
 
   #input {
@@ -351,17 +367,22 @@
 
   .exchangeDropdownContainer {
     font-size: 17px;
+    height: 50px;
   }
 
-  .submit {
-    font-size: 17px;
-  }
+  /*  .submit {
+    font-size: 15px;
+  }*/
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .headerSymbol {
-    font-size: 25px;
+    font-size: 17px;
+  }
+
+  .headerContainer {
+    height: 50px;
   }
 
   #input {
@@ -374,16 +395,21 @@
 
   .exchangeDropdownContainer {
     font-size: 17px;
+    height: 50px;
   }
   .submit {
-    font-size: 17px;
+    font-size: 10px;
   }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .headerSymbol {
-    font-size: 25px;
+    font-size: 17px;
+  }
+
+  .headerContainer {
+    height: 50px;
   }
 
   #input {
@@ -396,9 +422,10 @@
 
   .exchangeDropdownContainer {
     font-size: 17px;
+    height: 50px;
   }
   .submit {
-    font-size: 17px;
+    font-size: 15px;
   }
 }
 

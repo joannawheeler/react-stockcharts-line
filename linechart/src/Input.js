@@ -17,8 +17,10 @@ class Input extends React.Component {
 
   submit = event => {
     event.preventDefault();
-    if (this.props.symbols.includes(this.props.value)) {
-      this.props.setData();
+    if (this.props.symbols) {
+      if (this.props.symbols.includes(this.props.value)) {
+        this.props.setData();
+      }
     }
   };
 
@@ -67,7 +69,7 @@ class Input extends React.Component {
     let symbolItems = [];
     return (
       <Form inline onSubmit={this.submit} className="symbolBar">
-        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
+        <Col className="headerCol innerHeaderColumns" xs={6} sm={3} md={3} lg={3}>
           <FormGroup>
             <ExchangeDropdown
               exchanges={this.state.exchanges}
@@ -78,95 +80,101 @@ class Input extends React.Component {
           </FormGroup>
         </Col>
 
-        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
+        <Col className="headerCol innerHeaderColumns" xs={6} sm={3} md={3} lg={3}>
           <FormGroup>
             {this.props.symbols !== null ? (
-              <Downshift
-                onInputValueChange={this.toggleCursor}
-                //this.props.value gets set to the item selected from the dropdown ie GNTBNB onChange
-                onChange={this.props.handleSymbolChange}
-                itemToString={item => (item ? item : '')}>
-                {({
-                  getInputProps,
-                  getItemProps,
-                  getLabelProps,
-                  getMenuProps,
-                  isOpen,
-                  inputValue,
-                  highlightedIndex,
-                  selectedItem,
-                  itemCount,
-                  items
-                }) => (
-                  <div className="symbolInput" style={{ borderBottom: 'solid ' + this.state.symbolColor + ' 1.5px' }}>
-                    <input
-                      style={{ color: this.state.symbolColor }}
-                      {...getInputProps({
-                        onMouseOver: this.handleMouseOver,
-                        onMouseOut: this.handleMouseOut
-                      })}
-                      placeholder={this.props.placeholder}
-                      id="input"
-                      onFocus={this.props.clearPlaceholder}
-                    />
-                    <ul
-                      style={{
-                        height: 'auto',
-                        border: isOpen ? 'solid 2px #44adef' : 'none',
-                        maxHeight: '150px',
-                        borderRadius: '6px',
-                        overflow: 'auto'
-                      }}
-                      {...getMenuProps({ className: 'symbolList' })}>
-                      {isOpen
-                        ? this.props.symbols
-                            .filter((item, index) => {
-                              let matches = true;
-                              inputValue = inputValue.toUpperCase();
-                              for (var i = 0; i < inputValue.length; i++) {
-                                if (item[i] !== inputValue[i]) {
-                                  matches = false;
-                                }
-                              }
-                              if (matches === false) {
-                                return false;
-                              } else {
-                                return true;
-                              }
-                            })
-                            .map((item, index) => {
-                              if (inputValue !== '') {
-                                return (
-                                  <li
-                                    {...getItemProps({
-                                      key: item,
-                                      index,
-                                      item,
-                                      style: {
-                                        backgroundColor: highlightedIndex === index ? 'lightgray' : 'white',
-                                        fontWeight: selectedItem === item ? 'bold' : 'normal',
-                                        opacity: 1
-                                      }
-                                    })}
-                                    className="symbol"
-                                    id="symbol">
-                                    {item}
-                                  </li>
-                                );
-                              } else {
-                                return null;
-                              }
-                            })
-                        : null}
-                    </ul>
-                  </div>
-                )}
-              </Downshift>
+              <div className="exchangeDropdownContainer">
+                <div className="innerDropdownContainer">
+                  <Downshift
+                    onInputValueChange={this.toggleCursor}
+                    //this.props.value gets set to the item selected from the dropdown ie GNTBNB onChange
+                    onChange={this.props.handleSymbolChange}
+                    itemToString={item => (item ? item : '')}>
+                    {({
+                      getInputProps,
+                      getItemProps,
+                      getLabelProps,
+                      getMenuProps,
+                      isOpen,
+                      inputValue,
+                      highlightedIndex,
+                      selectedItem,
+                      itemCount,
+                      items
+                    }) => (
+                      <div
+                        className="symbolInput"
+                        style={{ borderBottom: 'solid ' + this.state.symbolColor + ' 1.5px' }}>
+                        <input
+                          style={{ color: this.state.symbolColor }}
+                          {...getInputProps({
+                            onMouseOver: this.handleMouseOver,
+                            onMouseOut: this.handleMouseOut
+                          })}
+                          placeholder={this.props.placeholder}
+                          id="input"
+                          onFocus={this.props.clearPlaceholder}
+                        />
+                        <ul
+                          style={{
+                            height: 'auto',
+                            border: isOpen ? 'solid 2px #44adef' : 'none',
+                            maxHeight: '150px',
+                            borderRadius: '6px',
+                            overflow: 'auto'
+                          }}
+                          {...getMenuProps({ className: 'symbolList' })}>
+                          {isOpen
+                            ? this.props.symbols
+                                .filter((item, index) => {
+                                  let matches = true;
+                                  inputValue = inputValue.toUpperCase();
+                                  for (var i = 0; i < inputValue.length; i++) {
+                                    if (item[i] !== inputValue[i]) {
+                                      matches = false;
+                                    }
+                                  }
+                                  if (matches === false) {
+                                    return false;
+                                  } else {
+                                    return true;
+                                  }
+                                })
+                                .map((item, index) => {
+                                  if (inputValue !== '') {
+                                    return (
+                                      <li
+                                        {...getItemProps({
+                                          key: item,
+                                          index,
+                                          item,
+                                          style: {
+                                            backgroundColor: highlightedIndex === index ? 'lightgray' : 'white',
+                                            fontWeight: selectedItem === item ? 'bold' : 'normal',
+                                            opacity: 1
+                                          }
+                                        })}
+                                        className="symbol"
+                                        id="symbol">
+                                        {item}
+                                      </li>
+                                    );
+                                  } else {
+                                    return null;
+                                  }
+                                })
+                            : null}
+                        </ul>
+                      </div>
+                    )}
+                  </Downshift>
+                </div>
+              </div>
             ) : null}
           </FormGroup>
         </Col>
 
-        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
+        <Col className="headerCol innerHeaderColumns" xs={6} sm={3} md={3} lg={3}>
           <FormGroup controlId="">
             <IntervalDropdown
               intervals={this.state.intervals}
@@ -176,10 +184,12 @@ class Input extends React.Component {
           </FormGroup>
         </Col>
 
-        <Col className="headerCol" xs={3} sm={3} md={3} lg={3}>
-          <Button bsStyle="link" style={{ textDecoration: 'none' }} type="submit" className="submit">
-            Update
-          </Button>
+        <Col className="headerCol innerHeaderColumns" xs={6} sm={3} md={3} lg={3}>
+          <div style={{ textAlign: 'center' }}>
+            <Button bsStyle="link" type="submit" className="submit" style={{ textDecoration: 'none', float: 'none' }}>
+              Update
+            </Button>
+          </div>
         </Col>
       </Form>
     );

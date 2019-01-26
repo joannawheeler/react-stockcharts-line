@@ -31,7 +31,7 @@ class ExchangeDropdown extends React.Component {
     );
 
     return (
-      <div className="exchangeDropdownContainer" onClick={this.showDropdownItems}>
+      <div className="exchangeDropdownContainer">
         <div className="innerDropdownContainer">
           <div className="currentExchange" onClick={this.showDropdownItems}>
             {this.props.exchange} &nbsp;
